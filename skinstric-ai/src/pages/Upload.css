@@ -1,0 +1,174 @@
+/* SKINSTRIC PHOTO UPLOAD AND CAMERA */
+
+.upload-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: white;
+  color: #111;
+  display: flex;
+  flex-direction: column;
+}
+
+.upload-heading {
+  padding: 35px 3%;
+}
+
+.upload-heading p {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.upload-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(30px, 7vw, 130px);
+  padding: 40px;
+}
+
+.upload-choice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 65px;
+}
+
+.upload-diamond {
+  width: clamp(180px, 22vw, 300px);
+  height: clamp(180px, 22vw, 300px);
+  border: 2px dotted #ddd;
+  transform: rotate(45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-icon {
+  transform: rotate(-45deg);
+  border: none;
+  background: transparent;
+  color: #111;
+  font-size: 65px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.upload-icon:hover {
+  transform: rotate(-45deg) scale(1.1);
+}
+
+.upload-choice p {
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* CAMERA */
+
+.camera-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  padding: 30px 20px;
+}
+
+.camera-section h2 {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.camera-video,
+.camera-preview {
+  width: min(90vw, 560px);
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: #111;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.camera-video {
+  transform: scaleX(-1);
+}
+
+.camera-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.camera-actions button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #111;
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.camera-actions button:hover {
+  background: #333;
+}
+
+.camera-message {
+  text-align: center;
+  font-size: 13px;
+  padding: 12px;
+}
+
+/* FOOTER */
+
+.upload-footer {
+  padding: 25px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  font-size: 12px;
+}
+
+.upload-back {
+  color: #111;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+  .upload-content {
+    flex-direction: column;
+    gap: 60px;
+  }
+
+  .upload-diamond {
+    width: 190px;
+    height: 190px;
+  }
+
+  .upload-choice {
+    gap: 45px;
+  }
+
+  .upload-icon {
+    font-size: 45px;
+  }
+
+  .camera-section h2 {
+    font-size: 13px;
+  }
+
+  .upload-footer {
+    font-size: 10px;
+  }
+}

@@ -1,122 +1,99 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+import { Routes, Route, Link } from "react-router-dom";
 
+import Testing from "./pages/Testing";
+import Location from "./pages/Location";
+import Upload from "./pages/Upload";
+import Analysis from "./pages/Analysis";
+import Processing from "./pages/Processing";
+import Demographics from "./pages/Demographics";
+
+import "./App.css";
+
+// SKINSTRIC LANDING PAGE
+
+function Home() {
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div className="skinstric">
+      <header className="navbar">
+        <div className="brand">
+          <strong>SKINSTRIC</strong>
+          <span>[ INTRO ]</span>
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
+
+        <button className="code-btn" type="button">
+          ENTER CODE
         </button>
-      </section>
+      </header>
 
-      <div className="ticks"></div>
+      <main className="hero">
+        <div
+          className="side-diamond diamond-left"
+          aria-hidden="true"
+        />
+        <div
+          className="side-diamond diamond-right"
+          aria-hidden="true"
+        />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        <a href="#about" className="hero-nav discover">
+          <span className="arrow-diamond">
+            <span className="arrow-shape left-arrow" />
+          </span>
+          <span>DISCOVER A.I.</span>
+        </a>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        <h1 className="hero-title">
+          Sophisticated
+          <br />
+          skincare
+        </h1>
+
+        <Link to="/testing" className="hero-nav take-test">
+          <span>TAKE TEST</span>
+          <span className="arrow-diamond">
+            <span className="arrow-shape right-arrow" />
+          </span>
+        </Link>
+      </main>
+
+      <footer className="footer" id="about">
+        <p>
+          SKINSTRIC DEVELOPED AN A.I. THAT CREATES A
+          <br />
+          HIGHLY-PERSONALISED ROUTINE TAILORED TO
+          <br />
+          WHAT YOUR SKIN NEEDS.
+        </p>
+      </footer>
+    </div>
+  );
 }
 
-export default App
+// ALL APPLICATION ROUTES
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/testing" element={<Testing />} />
+      <Route path="/location" element={<Location />} />
+      <Route path="/upload" element={<Upload />} />
+      <Route path="/analysis" element={<Analysis />} />
+      <Route path="/processing" element={<Processing />} />
+      <Route
+        path="/demographics"
+        element={<Demographics />}
+      />
+      <Route
+        path="*"
+        element={
+          <main style={{ padding: "40px" }}>
+            <h1>Page not found</h1>
+            <Link to="/">RETURN HOME</Link>
+          </main>
+        }
+      />
+    </Routes>
+  );
+}

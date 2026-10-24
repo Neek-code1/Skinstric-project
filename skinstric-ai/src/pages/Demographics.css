@@ -1,0 +1,525 @@
+/* ==========================================
+   SKINSTRIC AI - DEMOGRAPHICS PAGE
+   UPDATED RESPONSIVE DESIGN
+========================================== */
+
+/* PAGE */
+
+.demographics-page {
+  min-height: 100vh;
+  background: #ffffff;
+  color: #111111;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 24px 38px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.demographics-page * {
+  box-sizing: border-box;
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.demographics-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.demographics-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 12px;
+}
+
+.demographics-brand a {
+  color: #111111;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.demographics-brand span {
+  color: #888888;
+  font-weight: 400;
+}
+
+.demographics-code {
+  background: #111111;
+  color: #ffffff;
+  border: none;
+  border-radius: 0;
+  padding: 12px 20px;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ==========================================
+   PAGE INTRO
+========================================== */
+
+.demographics-intro {
+  margin-top: 45px;
+}
+
+.demographics-intro p {
+  font-size: 12px;
+  font-weight: 600;
+  margin: 8px 0;
+}
+
+.demographics-intro h1 {
+  font-size: clamp(38px, 5vw, 64px);
+  font-weight: 400;
+  letter-spacing: -2.5px;
+  line-height: 1.05;
+  margin: 12px 0;
+}
+
+.demographics-demo-label {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 10px;
+  color: #777777;
+  letter-spacing: 0.04em;
+}
+
+/* ==========================================
+   MAIN DASHBOARD GRID
+========================================== */
+
+.demographics-layout {
+  display: grid;
+  grid-template-columns:
+    185px
+    minmax(0, 1fr)
+    280px;
+  gap: 16px;
+
+  width: 100%;
+  height: 480px;
+  min-height: 0;
+  flex: none;
+
+  margin-top: 28px;
+  align-items: stretch;
+}
+
+/* ==========================================
+   LEFT CATEGORY CARDS
+========================================== */
+
+.demographics-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.demographics-category {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+
+  background: #f3f3f4;
+  color: #111111;
+
+  border: none;
+  border-top: 2px solid #111111;
+  border-radius: 0;
+
+  padding: 20px 16px;
+  text-align: left;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.demographics-category strong {
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.demographics-category span {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.demographics-category.active {
+  background: #111111;
+  color: #ffffff;
+}
+
+.demographics-category:hover:not(.active) {
+  background: #e4e4e4;
+}
+
+/* ==========================================
+   CENTER CHART PANEL
+========================================== */
+
+.demographics-chart-panel {
+  background: #f3f3f4;
+  border-top: 2px solid #111111;
+
+  padding: 20px 22px;
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.demographics-chart-panel h2 {
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.demographics-chart-panel p {
+  font-size: 12px;
+  margin: 8px 0 0;
+}
+
+/* CIRCULAR CONFIDENCE CHART */
+
+.demographics-chart {
+  width: min(300px, 78%);
+  aspect-ratio: 1;
+
+  flex-shrink: 0;
+  border-radius: 50%;
+
+  margin: auto;
+
+  background: conic-gradient(
+    #111111 var(--percentage),
+    #d4d4d4 var(--percentage)
+  );
+
+  display: grid;
+  place-items: center;
+
+  transition: background 0.25s ease;
+}
+
+.demographics-chart-inner {
+  width: 83%;
+  height: 83%;
+
+  border-radius: 50%;
+  background: #f3f3f4;
+
+  display: grid;
+  place-items: center;
+}
+
+.demographics-chart-inner strong {
+  font-size: clamp(38px, 5vw, 64px);
+  font-weight: 400;
+  letter-spacing: -2px;
+}
+
+/* ==========================================
+   RIGHT RESULTS PANEL
+========================================== */
+
+.demographics-results {
+  background: #f3f3f4;
+  border-top: 2px solid #111111;
+
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.demographics-results-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+
+  padding: 18px 14px;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.demographics-result {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+
+  padding: 17px 14px;
+
+  background: transparent;
+  border: none;
+  border-radius: 0;
+
+  color: #111111;
+  font-size: 13px;
+
+  cursor: pointer;
+  text-align: left;
+
+  transition: background 0.2s ease;
+}
+
+.demographics-result > span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.demographics-result.selected {
+  background: #111111;
+  color: #ffffff;
+}
+
+.demographics-result:hover:not(.selected) {
+  background: #e4e4e4;
+}
+
+.demographics-diamond {
+  font-size: 15px;
+}
+
+/* ==========================================
+   DEMO DISCLAIMER
+========================================== */
+
+.demographics-disclaimer {
+  text-align: center;
+  color: #777777;
+
+  font-size: 10px;
+  line-height: 1.5;
+
+  margin: 16px 0 10px;
+}
+
+/* ==========================================
+   FOOTER NAVIGATION
+========================================== */
+
+.demographics-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  margin-top: auto;
+  padding-top: 22px;
+}
+
+.demographics-footer a {
+  color: #111111;
+  text-decoration: none;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  transition: opacity 0.2s ease;
+}
+
+.demographics-footer a:hover {
+  opacity: 0.55;
+}
+
+/* ==========================================
+   TABLET RESPONSIVE
+========================================== */
+
+@media (max-width: 950px) {
+  .demographics-layout {
+    grid-template-columns:
+      155px
+      minmax(0, 1fr)
+      230px;
+
+    gap: 12px;
+    height: 450px;
+  }
+
+  .demographics-category {
+    padding: 15px 12px;
+  }
+
+  .demographics-category strong {
+    font-size: 16px;
+  }
+
+  .demographics-chart {
+    width: min(250px, 85%);
+  }
+
+  .demographics-chart-inner strong {
+    font-size: 46px;
+  }
+}
+
+/* ==========================================
+   SMALL TABLET
+========================================== */
+
+@media (max-width: 700px) {
+  .demographics-page {
+    padding: 20px;
+  }
+
+  .demographics-intro {
+    margin-top: 35px;
+  }
+
+  .demographics-intro h1 {
+    font-size: 44px;
+  }
+
+  .demographics-layout {
+    grid-template-columns: 1fr;
+    height: auto;
+    gap: 14px;
+  }
+
+  .demographics-categories {
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .demographics-category {
+    flex: 1;
+    min-width: 0;
+    min-height: 95px;
+    padding: 12px 10px;
+  }
+
+  .demographics-category strong {
+    font-size: 14px;
+    overflow-wrap: anywhere;
+  }
+
+  .demographics-chart-panel {
+    min-height: 370px;
+  }
+
+  .demographics-chart {
+    width: min(270px, 85%);
+  }
+
+  .demographics-results {
+    min-height: 210px;
+  }
+
+  .demographics-footer {
+    padding-top: 30px;
+  }
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 480px) {
+  .demographics-page {
+    padding: 18px 14px;
+  }
+
+  .demographics-brand {
+    gap: 8px;
+    font-size: 10px;
+  }
+
+  .demographics-code {
+    padding: 10px 12px;
+    font-size: 9px;
+  }
+
+  .demographics-intro h1 {
+    font-size: 36px;
+    letter-spacing: -1px;
+    overflow-wrap: anywhere;
+  }
+
+  .demographics-intro p {
+    font-size: 11px;
+  }
+
+  .demographics-category {
+    padding: 12px 8px;
+  }
+
+  .demographics-category strong {
+    font-size: 12px;
+  }
+
+  .demographics-category span {
+    font-size: 10px;
+  }
+
+  .demographics-chart-panel {
+    min-height: 340px;
+    padding: 16px;
+  }
+
+  .demographics-chart-panel h2 {
+    font-size: 25px;
+  }
+
+  .demographics-chart {
+    width: min(240px, 85%);
+  }
+
+  .demographics-chart-inner strong {
+    font-size: 42px;
+  }
+
+  .demographics-result {
+    font-size: 12px;
+  }
+
+  .demographics-disclaimer {
+    font-size: 9px;
+  }
+}
+
+/* ==========================================
+   SHORT DESKTOP SCREENS
+========================================== */
+
+@media (min-width: 701px) and (max-height: 800px) {
+  .demographics-intro {
+    margin-top: 25px;
+  }
+
+  .demographics-layout {
+    height: 390px;
+    margin-top: 20px;
+  }
+
+  .demographics-chart {
+    width: min(240px, 72%);
+  }
+
+  .demographics-footer {
+    padding-top: 14px;
+  }
+}
