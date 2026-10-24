@@ -1,0 +1,416 @@
+
+/* ==========================================
+   SKINSTRIC AI - INTRODUCTION PAGE
+   FINAL UPDATED TESTING.CSS
+========================================== */
+
+/* PAGE LAYOUT */
+
+.testing-page {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  background: #ffffff;
+  color: #111111;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.testing-page *,
+.testing-page *::before,
+.testing-page *::after {
+  box-sizing: border-box;
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.testing-header {
+  flex: 0 0 auto;
+  width: 100%;
+  padding: 24px 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 5;
+}
+
+.testing-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 12px;
+}
+
+.testing-brand a {
+  color: #111111;
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+
+.testing-brand span {
+  color: #777777;
+  font-size: 12px;
+}
+
+.testing-code-btn {
+  background: #111111;
+  color: #ffffff;
+  border: none;
+  border-radius: 0;
+  padding: 11px 18px;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ==========================================
+   TOP LEFT LABEL
+========================================== */
+
+.testing-top-label {
+  flex: 0 0 auto;
+  margin: 8px 34px 0;
+  font-size: 12px;
+  font-weight: 600;
+  position: relative;
+  z-index: 3;
+}
+
+/* ==========================================
+   MAIN CONTENT
+========================================== */
+
+.testing-content {
+  flex: 1 1 0;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  isolation: isolate;
+}
+
+/* ==========================================
+   THREE DOTTED DIAMONDS
+========================================== */
+
+.testing-diamonds {
+  position: absolute;
+  width: min(440px, 58vw, 52vh);
+  height: min(440px, 58vw, 52vh);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.testing-diamond {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  aspect-ratio: 1;
+  border: 2px dotted #c9c9c9;
+  background: transparent;
+  animation: none;
+}
+
+/* OUTER DIAMOND */
+
+.testing-diamond-one {
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* MIDDLE DIAMOND */
+
+.testing-diamond-two {
+  width: 85%;
+  height: 85%;
+  opacity: 0.4;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* INNER DIAMOND */
+
+.testing-diamond-three {
+  width: 70%;
+  height: 70%;
+  opacity: 0.3;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* ==========================================
+   CENTER CONTENT
+========================================== */
+
+.testing-center {
+  position: relative;
+  z-index: 2;
+  width: min(560px, 90vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* CLICK TO TYPE LABEL */
+
+.testing-click-label {
+  margin: 0 0 14px;
+  font-size: 13px;
+  font-weight: 400;
+  color: #8993ab;
+}
+
+/* ==========================================
+   NAME INPUT
+========================================== */
+
+.testing-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.testing-form input {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  padding: 5px 8px 10px;
+  border: none;
+  border-bottom: 1px solid #d4d4d4;
+  border-radius: 0;
+  outline: none;
+  background: transparent;
+  color: #111111;
+  font-family: inherit;
+
+  /* Smaller font to match reference */
+  font-size: clamp(26px, 3vw, 40px);
+
+  font-weight: 400;
+  text-align: center;
+}
+
+.testing-form input::placeholder {
+  color: #888888;
+  opacity: 1;
+}
+
+.testing-form input:focus {
+  border-bottom-color: #111111;
+}
+
+/* ==========================================
+   CONTINUE BUTTON
+========================================== */
+
+.testing-submit {
+  margin-top: 24px;
+  padding: 10px 18px;
+  background: #ffffff;
+  color: #111111;
+  border: 1px solid #111111;
+  border-radius: 0;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.testing-submit:hover {
+  background: #111111;
+  color: #ffffff;
+}
+
+/* ==========================================
+   THANK YOU SCREEN
+========================================== */
+
+.testing-thank-you h1 {
+  margin: 0 0 16px;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.testing-thank-you p {
+  margin: 0;
+  color: #5f6c82;
+  font-size: 17px;
+}
+
+/* ==========================================
+   FOOTER NAVIGATION
+========================================== */
+
+.testing-footer {
+  flex: 0 0 auto;
+  width: 100%;
+  padding: 18px 34px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 10;
+}
+
+.testing-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #111111;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.testing-next {
+  margin-left: auto;
+}
+
+/* ==========================================
+   FOOTER DIAMOND ARROWS
+========================================== */
+
+.testing-arrow-diamond {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border: 1px solid #111111;
+  transform: rotate(45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.testing-arrow {
+  display: block;
+  width: 0;
+  height: 0;
+  transform: rotate(-45deg);
+}
+
+.testing-arrow-left {
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 7px solid #111111;
+}
+
+.testing-arrow-right {
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 7px solid #111111;
+}
+
+/* ==========================================
+   TABLET RESPONSIVENESS
+========================================== */
+
+@media (max-width: 900px) {
+  .testing-diamonds {
+    width: min(380px, 58vw, 50vh);
+    height: min(380px, 58vw, 50vh);
+  }
+}
+
+/* ==========================================
+   MOBILE RESPONSIVENESS
+========================================== */
+
+@media (max-width: 600px) {
+  .testing-header {
+    padding: 20px 18px;
+  }
+
+  .testing-brand {
+    gap: 10px;
+  }
+
+  .testing-top-label {
+    margin: 8px 18px 0;
+  }
+
+  .testing-diamonds {
+    width: min(62vw, 38vh);
+    height: min(62vw, 38vh);
+  }
+
+  .testing-center {
+    width: 90vw;
+  }
+
+  .testing-form input {
+    max-width: 85vw;
+    font-size: 29px;
+  }
+
+  .testing-click-label {
+    font-size: 11px;
+  }
+
+  .testing-thank-you h1 {
+    font-size: 22px;
+  }
+
+  .testing-thank-you p {
+    font-size: 14px;
+  }
+
+  .testing-footer {
+    padding: 16px 18px 24px;
+  }
+
+  .testing-arrow-diamond {
+    width: 30px;
+    height: 30px;
+  }
+
+  .testing-nav {
+    gap: 14px;
+    font-size: 11px;
+  }
+}
+
+/* ==========================================
+   SMALL SCREEN HEIGHT ADJUSTMENTS
+========================================== */
+
+@media (max-height: 600px) {
+  .testing-header {
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+
+  .testing-diamonds {
+    width: min(300px, 45vh);
+    height: min(300px, 45vh);
+  }
+
+  .testing-footer {
+    padding-top: 10px;
+    padding-bottom: 16px;
+  }
+}
+

@@ -1,174 +1,504 @@
-/* SKINSTRIC PHOTO UPLOAD AND CAMERA */
+/* ==========================================
+   SKINSTRIC AI — UPLOAD PAGE
+========================================== */
 
 .upload-page {
   min-height: 100vh;
-  min-height: 100dvh;
-  background: white;
+  width: 100%;
+  padding: 24px 34px;
+  background: #fff;
   color: #111;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
 }
 
+.upload-page * {
+  box-sizing: border-box;
+}
+
+/* HEADER */
+
+.upload-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.upload-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 12px;
+}
+
+.upload-brand a {
+  text-decoration: none;
+  color: #111;
+  font-weight: 800;
+}
+
+.upload-brand span {
+  color: #777;
+}
+
+.upload-code {
+  border: 0;
+  border-radius: 0;
+  background: #111;
+  color: #fff;
+  padding: 11px 18px;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* PAGE HEADING */
+
 .upload-heading {
-  padding: 35px 3%;
+  margin-top: 34px;
 }
 
 .upload-heading p {
   font-size: 12px;
   font-weight: 600;
+  margin: 0;
 }
 
+/* SMALL PREVIEW */
+
+.upload-small-preview {
+  position: absolute;
+  top: 160px;
+  right: 34px;
+  width: 118px;
+  z-index: 4;
+}
+
+.upload-small-preview span {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.upload-preview-placeholder,
+.upload-small-preview img {
+  display: block;
+  width: 118px;
+  height: 118px;
+  border: 1px solid #d5d9e0;
+  background: #fff;
+  object-fit: cover;
+}
+
+/* MAIN OPTIONS */
+
 .upload-content {
+  width: 100%;
   flex: 1;
+  min-height: 530px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(30px, 7vw, 130px);
-  padding: 40px;
+  gap: 125px;
 }
 
 .upload-choice {
+  width: 355px;
+  height: 355px;
+  flex-shrink: 0;
+  position: relative;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 65px;
+}
+
+/* DOTTED DIAMONDS */
+
+.upload-diamond-stack {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
 .upload-diamond {
-  width: clamp(180px, 22vw, 300px);
-  height: clamp(180px, 22vw, 300px);
-  border: 2px dotted #ddd;
+  position: absolute;
+  width: 83%;
+  height: 83%;
+  top: 8.5%;
+  left: 8.5%;
+  border: 2px dotted #d7d7d7;
+}
+
+.upload-diamond.diamond-one {
+  transform: rotate(28deg);
+  opacity: 0.42;
+}
+
+.upload-diamond.diamond-two {
+  transform: rotate(49deg);
+  opacity: 0.72;
+}
+
+.upload-diamond.diamond-three {
+  transform: rotate(67deg);
+  opacity: 0.3;
+}
+
+/* ICON BUTTONS */
+
+.upload-icon {
+  width: 112px;
+  height: 112px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+  z-index: 2;
+  transition: transform 0.2s ease;
+}
+
+.upload-icon:hover {
+  transform: scale(1.06);
+}
+
+.upload-symbol {
+  width: 112px;
+  height: 112px;
+  display: block;
+}
+
+/* CONNECTOR LABELS */
+
+.upload-camera-label,
+.upload-gallery-label {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.upload-camera-label {
+  left: 63%;
+  top: 35%;
+}
+
+.upload-gallery-label {
+  right: 63%;
+  top: 60%;
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.upload-line {
+  display: block;
+  width: 65px;
+  height: 1px;
+  background: #666;
+  transform: rotate(-45deg);
+  transform-origin: center;
+}
+
+.upload-gallery-label .upload-line {
+  transform: rotate(-45deg);
+}
+
+/* PERMISSION DIALOG */
+
+.upload-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.upload-permission-modal {
+  width: 340px;
+  max-width: calc(100vw - 32px);
+  background: #171717;
+  color: #fff;
+}
+
+.upload-permission-modal h2 {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0;
+  padding: 20px 15px 34px;
+}
+
+.upload-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid #fff;
+}
+
+.upload-modal-actions button {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.upload-modal-actions button:hover {
+  background: #333;
+}
+
+/* LIVE CAMERA */
+
+.camera-section {
+  flex: 1;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.camera-stage {
+  position: relative;
+  width: min(100%, 1000px);
+  height: min(72vh, 700px);
+  background: #101827;
+  overflow: hidden;
+}
+
+.camera-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+}
+
+.camera-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px;
+  color: #fff;
+  pointer-events: none;
+}
+
+.camera-overlay p {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.camera-overlay .camera-actions {
+  pointer-events: auto;
+}
+
+/* PHOTO PREVIEW */
+
+.upload-preview-section h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.camera-preview {
+  width: min(460px, 90%);
+  max-height: 55vh;
+  object-fit: contain;
+  border: 1px solid #dedede;
+}
+
+/* ACTION BUTTONS */
+
+.camera-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+.camera-actions button {
+  border: 1px solid #111;
+  border-radius: 0;
+  padding: 12px 16px;
+  background: #fff;
+  color: #111;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.camera-actions button:hover {
+  background: #111;
+  color: #fff;
+}
+
+.camera-message {
+  color: #a00000;
+  text-align: center;
+  font-size: 13px;
+  padding: 10px;
+}
+
+/* FOOTER */
+
+.upload-footer {
+  margin-top: auto;
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+}
+
+.upload-back {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: #111;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.upload-arrow-diamond {
+  width: 38px;
+  height: 38px;
+  border: 1px solid #111;
   transform: rotate(45deg);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.upload-icon {
+.upload-arrow-left {
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 7px solid #111;
   transform: rotate(-45deg);
-  border: none;
-  background: transparent;
-  color: #111;
-  font-size: 65px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
 }
 
-.upload-icon:hover {
-  transform: rotate(-45deg) scale(1.1);
-}
+/* TABLET */
 
-.upload-choice p {
-  font-size: 12px;
-  font-weight: 600;
-  text-align: center;
-}
+@media (max-width: 950px) {
+  .upload-content {
+    gap: 20px;
+  }
 
-/* CAMERA */
+  .upload-choice {
+    width: 290px;
+    height: 290px;
+  }
 
-.camera-section {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 25px;
-  padding: 30px 20px;
-}
+  .upload-icon,
+  .upload-symbol {
+    width: 94px;
+    height: 94px;
+  }
 
-.camera-section h2 {
-  font-size: 16px;
-  font-weight: 600;
-  text-align: center;
-}
+  .upload-camera-label,
+  .upload-gallery-label {
+    font-size: 10px;
+  }
 
-.camera-video,
-.camera-preview {
-  width: min(90vw, 560px);
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  background: #111;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-}
-
-.camera-video {
-  transform: scaleX(-1);
-}
-
-.camera-actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-}
-
-.camera-actions button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: #111;
-  color: white;
-  border: none;
-  padding: 14px 20px;
-  font-size: 12px;
-  cursor: pointer;
-}
-
-.camera-actions button:hover {
-  background: #333;
-}
-
-.camera-message {
-  text-align: center;
-  font-size: 13px;
-  padding: 12px;
-}
-
-/* FOOTER */
-
-.upload-footer {
-  padding: 25px 5%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-  font-size: 12px;
-}
-
-.upload-back {
-  color: #111;
-  text-decoration: none;
-  font-weight: 600;
+  .upload-line {
+    width: 40px;
+  }
 }
 
 /* MOBILE */
 
-@media (max-width: 768px) {
-  .upload-content {
-    flex-direction: column;
-    gap: 60px;
+@media (max-width: 650px) {
+  .upload-page {
+    padding: 18px 14px;
   }
 
-  .upload-diamond {
-    width: 190px;
-    height: 190px;
+  .upload-small-preview {
+    top: 130px;
+    right: 14px;
+    width: 75px;
+  }
+
+  .upload-preview-placeholder,
+  .upload-small-preview img {
+    width: 75px;
+    height: 75px;
+  }
+
+  .upload-content {
+    flex-direction: column;
+    gap: 10px;
+    min-height: 650px;
+    padding: 40px 0 20px;
   }
 
   .upload-choice {
-    gap: 45px;
+    width: 250px;
+    height: 250px;
   }
 
-  .upload-icon {
-    font-size: 45px;
+  .upload-icon,
+  .upload-symbol {
+    width: 80px;
+    height: 80px;
   }
 
-  .camera-section h2 {
-    font-size: 13px;
+  .upload-camera-label,
+  .upload-gallery-label {
+    font-size: 9px;
   }
 
-  .upload-footer {
+  .upload-camera-label {
+    left: 61%;
+    top: 35%;
+  }
+
+  .upload-gallery-label {
+    right: 61%;
+    top: 60%;
+  }
+
+  .upload-line {
+    width: 24px;
+  }
+
+  .camera-stage {
+    height: 60vh;
+  }
+
+  .camera-actions {
+    gap: 8px;
+  }
+
+  .camera-actions button {
+    padding: 10px;
     font-size: 10px;
+  }
+
+  .upload-arrow-diamond {
+    width: 30px;
+    height: 30px;
   }
 }

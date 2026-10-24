@@ -3,14 +3,15 @@ import { Routes, Route, Link } from "react-router-dom";
 
 import Testing from "./pages/Testing";
 import Location from "./pages/Location";
+import IntroProcessing from "./pages/IntroProcessing";
+import ThankYou from "./pages/ThankYou";
 import Upload from "./pages/Upload";
 import Analysis from "./pages/Analysis";
 import Processing from "./pages/Processing";
+import Select from "./pages/Select";
 import Demographics from "./pages/Demographics";
 
 import "./App.css";
-
-// SKINSTRIC LANDING PAGE
 
 function Home() {
   return (
@@ -31,6 +32,7 @@ function Home() {
           className="side-diamond diamond-left"
           aria-hidden="true"
         />
+
         <div
           className="side-diamond diamond-right"
           aria-hidden="true"
@@ -70,21 +72,38 @@ function Home() {
   );
 }
 
-// ALL APPLICATION ROUTES
-
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+
       <Route path="/testing" element={<Testing />} />
+
       <Route path="/location" element={<Location />} />
+
+      <Route
+        path="/intro-processing"
+        element={<IntroProcessing />}
+      />
+
+      <Route
+        path="/thank-you"
+        element={<ThankYou />}
+      />
+
       <Route path="/upload" element={<Upload />} />
+
       <Route path="/analysis" element={<Analysis />} />
+
       <Route path="/processing" element={<Processing />} />
+
+      <Route path="/select" element={<Select />} />
+
       <Route
         path="/demographics"
         element={<Demographics />}
       />
+
       <Route
         path="*"
         element={

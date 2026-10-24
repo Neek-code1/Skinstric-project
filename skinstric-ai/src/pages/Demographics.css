@@ -1,16 +1,15 @@
 /* ==========================================
-   SKINSTRIC AI - DEMOGRAPHICS PAGE
-   UPDATED RESPONSIVE DESIGN
+   SKINSTRIC AI — DEMOGRAPHICS
+   FINAL REFERENCE-ALIGNED STYLING
 ========================================== */
-
-/* PAGE */
 
 .demographics-page {
   min-height: 100vh;
+  width: 100%;
+  padding: 24px 34px;
   background: #ffffff;
   color: #111111;
   font-family: Arial, Helvetica, sans-serif;
-  padding: 24px 38px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -20,9 +19,7 @@
   box-sizing: border-box;
 }
 
-/* ==========================================
-   HEADER
-========================================== */
+/* HEADER */
 
 .demographics-header {
   display: flex;
@@ -45,8 +42,7 @@
 }
 
 .demographics-brand span {
-  color: #888888;
-  font-weight: 400;
+  color: #777777;
 }
 
 .demographics-code {
@@ -54,66 +50,50 @@
   color: #ffffff;
   border: none;
   border-radius: 0;
-  padding: 12px 20px;
+  padding: 11px 18px;
   font-size: 10px;
   font-weight: 600;
   cursor: pointer;
 }
 
-/* ==========================================
-   PAGE INTRO
-========================================== */
+/* PAGE TITLE */
 
 .demographics-intro {
-  margin-top: 45px;
+  margin-top: 34px;
 }
 
 .demographics-intro p {
   font-size: 12px;
   font-weight: 600;
-  margin: 8px 0;
+  margin: 7px 0;
 }
 
 .demographics-intro h1 {
-  font-size: clamp(38px, 5vw, 64px);
+  font-size: clamp(40px, 5.5vw, 68px);
   font-weight: 400;
-  letter-spacing: -2.5px;
+  letter-spacing: -3px;
   line-height: 1.05;
-  margin: 12px 0;
+  margin: 6px 0;
 }
 
-.demographics-demo-label {
-  display: inline-block;
-  margin-top: 10px;
-  font-size: 10px;
-  color: #777777;
-  letter-spacing: 0.04em;
-}
-
-/* ==========================================
-   MAIN DASHBOARD GRID
-========================================== */
+/* MAIN DASHBOARD */
 
 .demographics-layout {
   display: grid;
   grid-template-columns:
-    185px
+    125px
     minmax(0, 1fr)
-    280px;
-  gap: 16px;
+    270px;
+  gap: 15px;
 
   width: 100%;
-  height: 480px;
+  height: 620px;
   min-height: 0;
   flex: none;
-
-  margin-top: 28px;
-  align-items: stretch;
+  margin-top: 70px;
 }
 
-/* ==========================================
-   LEFT CATEGORY CARDS
-========================================== */
+/* LEFT CATEGORY CARDS */
 
 .demographics-categories {
   display: flex;
@@ -124,164 +104,155 @@
 
 .demographics-category {
   flex: 1;
-  width: 100%;
   min-height: 0;
+  width: 100%;
+  padding: 14px 12px;
 
   background: #f3f3f4;
   color: #111111;
-
   border: none;
-  border-top: 2px solid #111111;
+  border-top: 1px solid #111111;
   border-radius: 0;
-
-  padding: 20px 16px;
-  text-align: left;
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 10px;
+  justify-content: space-between;
+  align-items: flex-start;
 
+  text-align: left;
   cursor: pointer;
-  transition:
-    background 0.2s ease,
-    color 0.2s ease;
 }
 
 .demographics-category strong {
-  font-size: 19px;
+  font-size: 14px;
   font-weight: 600;
-  line-height: 1.1;
-  text-transform: uppercase;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
 .demographics-category span {
   font-size: 12px;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 .demographics-category.active {
-  background: #111111;
+  background: #171717;
   color: #ffffff;
 }
 
 .demographics-category:hover:not(.active) {
-  background: #e4e4e4;
+  background: #e3e3e3;
 }
 
-/* ==========================================
-   CENTER CHART PANEL
-========================================== */
+/* CENTER RESULTS PANEL */
 
 .demographics-chart-panel {
-  background: #f3f3f4;
-  border-top: 2px solid #111111;
-
-  padding: 20px 22px;
+  position: relative;
   min-width: 0;
   min-height: 0;
+  padding: 18px 20px;
 
-  display: flex;
-  flex-direction: column;
+  background: #f3f3f4;
+  border-top: 1px solid #111111;
+  overflow: hidden;
 }
 
 .demographics-chart-panel h2 {
-  font-size: 30px;
+  font-size: clamp(24px, 3vw, 36px);
   font-weight: 400;
-  line-height: 1.1;
-  text-transform: uppercase;
+  line-height: 1.15;
   margin: 0;
 }
 
-.demographics-chart-panel p {
-  font-size: 12px;
-  margin: 8px 0 0;
-}
+/* CONFIDENCE CHART POSITION */
 
-/* CIRCULAR CONFIDENCE CHART */
+.demographics-chart-area {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
 
-.demographics-chart {
-  width: min(300px, 78%);
+  width: min(365px, 78%);
   aspect-ratio: 1;
 
-  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+}
+
+/* THIN CIRCULAR CONFIDENCE RING */
+
+.demographics-chart {
+  width: 100%;
+  aspect-ratio: 1;
   border-radius: 50%;
 
-  margin: auto;
-
   background: conic-gradient(
-    #111111 var(--percentage),
-    #d4d4d4 var(--percentage)
+    #171717 var(--percentage),
+    #d1d1d1 var(--percentage)
   );
 
   display: grid;
   place-items: center;
-
-  transition: background 0.25s ease;
 }
 
 .demographics-chart-inner {
-  width: 83%;
-  height: 83%;
+  width: calc(100% - 6px);
+  height: calc(100% - 6px);
 
-  border-radius: 50%;
   background: #f3f3f4;
+  border-radius: 50%;
 
   display: grid;
   place-items: center;
 }
 
 .demographics-chart-inner strong {
-  font-size: clamp(38px, 5vw, 64px);
+  font-size: clamp(28px, 3vw, 40px);
   font-weight: 400;
-  letter-spacing: -2px;
+  letter-spacing: -1px;
 }
 
-/* ==========================================
-   RIGHT RESULTS PANEL
-========================================== */
+/* RIGHT RESULTS PANEL */
 
 .demographics-results {
-  background: #f3f3f4;
-  border-top: 2px solid #111111;
-
   min-width: 0;
   min-height: 0;
+
+  background: #f3f3f4;
+  border-top: 1px solid #111111;
   overflow-y: auto;
 }
 
 .demographics-results-heading {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   gap: 8px;
 
-  padding: 18px 14px;
+  padding: 16px 14px;
+  font-size: 12px;
+}
 
-  font-size: 11px;
-  font-weight: 600;
+.demographics-results-heading strong {
+  font-weight: 500;
 }
 
 .demographics-result {
   width: 100%;
+  padding: 13px 14px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
 
-  padding: 17px 14px;
-
   background: transparent;
+  color: #111111;
   border: none;
   border-radius: 0;
 
-  color: #111111;
   font-size: 13px;
-
-  cursor: pointer;
   text-align: left;
-
-  transition: background 0.2s ease;
+  cursor: pointer;
 }
 
 .demographics-result > span:first-child {
@@ -291,112 +262,139 @@
 }
 
 .demographics-result.selected {
-  background: #111111;
+  background: #171717;
   color: #ffffff;
 }
 
 .demographics-result:hover:not(.selected) {
-  background: #e4e4e4;
+  background: #e1e1e1;
 }
 
 .demographics-diamond {
   font-size: 15px;
 }
 
-/* ==========================================
-   DEMO DISCLAIMER
-========================================== */
+/* BOTTOM NAVIGATION */
 
-.demographics-disclaimer {
-  text-align: center;
-  color: #777777;
-
-  font-size: 10px;
-  line-height: 1.5;
-
-  margin: 16px 0 10px;
-}
-
-/* ==========================================
-   FOOTER NAVIGATION
-========================================== */
-
-.demographics-footer {
+.demographics-bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 18px;
 
   width: 100%;
-  margin-top: auto;
-  padding-top: 22px;
+  margin-top: 26px;
 }
 
-.demographics-footer a {
+.demographics-nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
   color: #111111;
   text-decoration: none;
-
   font-size: 12px;
   font-weight: 600;
-
-  transition: opacity 0.2s ease;
+  white-space: nowrap;
 }
 
-.demographics-footer a:hover {
-  opacity: 0.55;
+.demographics-nav:hover {
+  opacity: 0.7;
 }
 
-/* ==========================================
-   TABLET RESPONSIVE
-========================================== */
+/* DIAMOND ARROW BUTTONS */
 
-@media (max-width: 950px) {
+.demographics-arrow-box {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+
+  border: 1px solid #111111;
+  transform: rotate(45deg);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.demographics-arrow-left,
+.demographics-arrow-right {
+  width: 0;
+  height: 0;
+  transform: rotate(-45deg);
+}
+
+.demographics-arrow-left {
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 7px solid #111111;
+}
+
+.demographics-arrow-right {
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 7px solid #111111;
+}
+
+/* DISCLAIMER */
+
+.demographics-disclaimer {
+  color: #9298a6;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* TABLET */
+
+@media (max-width: 900px) {
   .demographics-layout {
     grid-template-columns:
-      155px
+      115px
       minmax(0, 1fr)
-      230px;
-
-    gap: 12px;
-    height: 450px;
+      220px;
+    gap: 10px;
+    height: 540px;
+    margin-top: 45px;
   }
 
-  .demographics-category {
-    padding: 15px 12px;
+  .demographics-chart-area {
+    width: min(290px, 85%);
   }
 
-  .demographics-category strong {
-    font-size: 16px;
+  .demographics-result {
+    font-size: 11px;
+    padding: 12px 9px;
   }
 
-  .demographics-chart {
-    width: min(250px, 85%);
-  }
-
-  .demographics-chart-inner strong {
-    font-size: 46px;
+  .demographics-results-heading {
+    font-size: 10px;
+    padding: 14px 9px;
   }
 }
 
-/* ==========================================
-   SMALL TABLET
-========================================== */
+/* MOBILE */
 
-@media (max-width: 700px) {
+@media (max-width: 650px) {
   .demographics-page {
-    padding: 20px;
+    padding: 18px 14px;
   }
 
   .demographics-intro {
-    margin-top: 35px;
+    margin-top: 28px;
   }
 
   .demographics-intro h1 {
-    font-size: 44px;
+    font-size: 38px;
+    letter-spacing: -1px;
   }
 
   .demographics-layout {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     height: auto;
+    margin-top: 30px;
     gap: 14px;
   }
 
@@ -408,63 +406,8 @@
   .demographics-category {
     flex: 1;
     min-width: 0;
-    min-height: 95px;
-    padding: 12px 10px;
-  }
-
-  .demographics-category strong {
-    font-size: 14px;
-    overflow-wrap: anywhere;
-  }
-
-  .demographics-chart-panel {
-    min-height: 370px;
-  }
-
-  .demographics-chart {
-    width: min(270px, 85%);
-  }
-
-  .demographics-results {
-    min-height: 210px;
-  }
-
-  .demographics-footer {
-    padding-top: 30px;
-  }
-}
-
-/* ==========================================
-   MOBILE
-========================================== */
-
-@media (max-width: 480px) {
-  .demographics-page {
-    padding: 18px 14px;
-  }
-
-  .demographics-brand {
-    gap: 8px;
-    font-size: 10px;
-  }
-
-  .demographics-code {
-    padding: 10px 12px;
-    font-size: 9px;
-  }
-
-  .demographics-intro h1 {
-    font-size: 36px;
-    letter-spacing: -1px;
-    overflow-wrap: anywhere;
-  }
-
-  .demographics-intro p {
-    font-size: 11px;
-  }
-
-  .demographics-category {
-    padding: 12px 8px;
+    min-height: 100px;
+    padding: 10px 8px;
   }
 
   .demographics-category strong {
@@ -476,50 +419,51 @@
   }
 
   .demographics-chart-panel {
-    min-height: 340px;
-    padding: 16px;
+    height: 380px;
+    flex-shrink: 0;
   }
 
-  .demographics-chart-panel h2 {
-    font-size: 25px;
+  .demographics-chart-area {
+    right: 12px;
+    bottom: 12px;
+    width: min(275px, 82%);
   }
 
-  .demographics-chart {
-    width: min(240px, 85%);
+  .demographics-results {
+    min-height: 220px;
   }
 
-  .demographics-chart-inner strong {
-    font-size: 42px;
-  }
-
-  .demographics-result {
-    font-size: 12px;
+  .demographics-bottom {
+    margin-top: 28px;
+    flex-wrap: wrap;
   }
 
   .demographics-disclaimer {
-    font-size: 9px;
+    order: 3;
+    width: 100%;
+    font-size: 10px;
+  }
+
+  .demographics-nav {
+    font-size: 10px;
+    gap: 10px;
+  }
+
+  .demographics-arrow-box {
+    width: 30px;
+    height: 30px;
   }
 }
 
-/* ==========================================
-   SHORT DESKTOP SCREENS
-========================================== */
+/* SHORT DESKTOP SCREENS */
 
-@media (min-width: 701px) and (max-height: 800px) {
-  .demographics-intro {
-    margin-top: 25px;
-  }
-
+@media (min-width: 651px) and (max-height: 850px) {
   .demographics-layout {
-    height: 390px;
-    margin-top: 20px;
+    height: 470px;
+    margin-top: 30px;
   }
 
-  .demographics-chart {
-    width: min(240px, 72%);
-  }
-
-  .demographics-footer {
-    padding-top: 14px;
+  .demographics-chart-area {
+    width: min(290px, 75%);
   }
 }

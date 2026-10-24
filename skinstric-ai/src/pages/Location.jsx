@@ -1,69 +1,131 @@
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import "./Location.css";
 
 export default function Location() {
-  const [location, setLocation] = useState("");
   const navigate = useNavigate();
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  const [location, setLocation] = useState("");
 
-    if (!location.trim()) return;
+  /* ==========================================
+     SAVE LOCATION AND CONTINUE
+  ========================================== */
 
-    sessionStorage.setItem(
-      "skinstricLocation",
-      location.trim()
-    );
+  function handleSubmit(event) {
+    event.preventDefault();
 
-    navigate("/upload");
+    const cleanLocation = location.trim();
+
+    if (!cleanLocation) return;
+
+    try {
+      sessionStorage.setItem(
+        "skinstricLocation",
+        cleanLocation
+      );
+    } catch (error) {
+      console.error("Unable to save location:", error);
+    }
+
+    // Go to introduction processing screen
+    navigate("/intro-processing");
   }
 
   return (
-    <div className="testing-page">
-      <header className="navbar">
-        <div className="brand">
-          <strong>SKINSTRIC</strong>
+    <div className="location-page">
+
+      {/* ======================================
+          HEADER
+      ====================================== */}
+
+      <header className="location-header">
+        <div className="location-brand">
+          <Link to="/">
+            SKINSTRIC
+          </Link>
+
           <span>[ INTRO ]</span>
         </div>
 
-        <button className="code-btn" type="button">
+        <button
+          type="button"
+          className="location-code-btn"
+        >
           ENTER CODE
         </button>
       </header>
 
-      <main className="testing-content">
-        <p className="testing-label">
-          TO START ANALYSIS
-        </p>
+      {/* ======================================
+          TOP LEFT LABEL
+      ====================================== */}
 
-        {/* Decorative diamond only */}
+      <div className="location-top-label">
+        TO START ANALYSIS
+      </div>
+
+      {/* ======================================
+          MAIN CONTENT
+      ====================================== */}
+
+      <main className="location-content">
+
+        {/* THREE DOTTED DIAMONDS */}
+
         <div
-          className="testing-diamond"
+          className="location-diamonds"
           aria-hidden="true"
-        />
+        >
+          <div className="location-diamond location-diamond-one" />
 
-        {/* Form stays horizontal */}
-        <div className="testing-form">
-          <p>CLICK TO TYPE</p>
+          <div className="location-diamond location-diamond-two" />
 
-          <form onSubmit={handleSubmit}>
+          <div className="location-diamond location-diamond-three" />
+        </div>
+
+        {/* LOCATION INPUT */}
+
+        <div className="location-center">
+          <p className="location-click-label">
+            CLICK TO TYPE
+          </p>
+
+          <form
+            className="location-form"
+            onSubmit={handleSubmit}
+          >
             <input
               type="text"
               placeholder="Where are you from?"
               value={location}
-              onChange={(e) => setLocation(e.target.value)}
+              onChange={(event) =>
+                setLocation(event.target.value)
+              }
               aria-label="Your location"
               autoComplete="address-level2"
+              maxLength={100}
               required
             />
-
-            <button type="submit">
-              PROCEED →
-            </button>
           </form>
         </div>
       </main>
+
+      {/* ======================================
+          FOOTER NAVIGATION
+      ====================================== */}
+
+      <footer className="location-footer">
+        <Link
+          to="/testing"
+          className="location-back"
+        >
+          <span className="location-arrow-diamond">
+            <span className="location-arrow-left" />
+          </span>
+
+          <span>BACK</span>
+        </Link>
+      </footer>
     </div>
   );
 }

@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Processing.css";
@@ -9,9 +8,7 @@ export default function Processing() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setProgress((previous) => {
-        return Math.min(previous + 2, 100);
-      });
+      setProgress((previous) => Math.min(previous + 2, 100));
     }, 100);
 
     return () => clearInterval(interval);
@@ -19,7 +16,7 @@ export default function Processing() {
 
   function handleContinue() {
     if (progress === 100) {
-      navigate("/demographics");
+      navigate("/select");
     }
   }
 
@@ -36,9 +33,7 @@ export default function Processing() {
         </button>
       </header>
 
-      <div className="processing-label">
-        PREPARING YOUR ANALYSIS
-      </div>
+      <div className="processing-label">PREPARING YOUR ANALYSIS</div>
 
       <main className="processing-main">
         <div className="processing-animation">
@@ -53,9 +48,7 @@ export default function Processing() {
                 : "Preparation complete"}
             </h1>
 
-            <p className="processing-percent">
-              {progress}%
-            </p>
+            <p className="processing-percent">{progress}%</p>
 
             <p className="processing-note">
               {progress < 100
@@ -67,10 +60,7 @@ export default function Processing() {
       </main>
 
       <footer className="processing-footer">
-        <Link
-          to="/analysis"
-          className="processing-back"
-        >
+        <Link to="/analysis" className="processing-back">
           ← BACK
         </Link>
 

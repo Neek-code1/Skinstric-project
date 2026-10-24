@@ -1,5 +1,6 @@
 /* =========================================
    SKINSTRIC AI - COMPLETE APP.CSS
+   CLEAN UPDATED VERSION
 ========================================= */
 
 /* GLOBAL RESET */
@@ -108,7 +109,9 @@ body {
   margin: 0;
 }
 
-/* LEFT AND RIGHT DIAMONDS */
+/* =========================================
+   LEFT AND RIGHT DIAMONDS
+========================================= */
 
 .side-diamond {
   position: absolute;
@@ -129,7 +132,9 @@ body {
   left: calc(100% - 260px);
 }
 
-/* LEFT AND RIGHT NAVIGATION */
+/* =========================================
+   LEFT AND RIGHT NAVIGATION
+========================================= */
 
 .hero-nav {
   position: absolute;
@@ -154,7 +159,9 @@ body {
   right: 5%;
 }
 
-/* ARROW DIAMONDS */
+/* =========================================
+   ARROW DIAMONDS
+========================================= */
 
 .arrow-diamond {
   width: 34px;
@@ -190,7 +197,9 @@ body {
   background: #eee;
 }
 
-/* FOOTER */
+/* =========================================
+   LANDING PAGE FOOTER
+========================================= */
 
 .footer {
   position: absolute;
@@ -207,124 +216,19 @@ body {
 }
 
 /* =========================================
-   INTRODUCTION AND LOCATION PAGES
+   IMPORTANT:
+   INTRODUCTION PAGE STYLES REMOVED
+
+   Testing.jsx now uses Testing.css.
+
+   This prevents conflicts involving:
+   .testing-page
+   .testing-content
+   .testing-diamond
+   .testing-form
+   .testing-form input
+   .testing-footer
 ========================================= */
-
-.testing-page {
-  min-height: 100vh;
-  min-height: 100dvh;
-  background: #fff;
-  color: #111;
-  display: flex;
-  flex-direction: column;
-}
-
-/* CENTERED CONTENT */
-
-.testing-content {
-  position: relative;
-  flex: 1;
-  min-height: calc(100vh - 70px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  isolation: isolate;
-}
-
-/* TOP LEFT LABEL */
-
-.testing-label {
-  position: absolute;
-  top: 20px;
-  left: 35px;
-  font-size: 12px;
-  font-weight: 600;
-  z-index: 3;
-}
-
-/* DECORATIVE DIAMOND */
-
-.testing-diamond {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: min(60vw, 500px);
-  height: min(60vw, 500px);
-  transform: translate(-50%, -50%) rotate(45deg);
-  border: 2px dotted #ddd;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* FORM - NOT ROTATED */
-
-.testing-form {
-  position: relative;
-  z-index: 2;
-  transform: none;
-  width: min(90%, 450px);
-  text-align: center;
-}
-
-.testing-form p {
-  color: #999;
-  font-size: 13px;
-  margin-bottom: 10px;
-}
-
-.testing-form form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* INPUT FIELD */
-
-.testing-form input {
-  display: block;
-  width: 100%;
-  max-width: 450px;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid #ddd;
-  border-radius: 0;
-  outline: none;
-  text-align: center;
-  font-size: clamp(22px, 3vw, 36px);
-  font-weight: 400;
-  padding: 15px;
-  color: #111;
-  position: relative;
-  z-index: 3;
-  pointer-events: auto;
-}
-
-.testing-form input::placeholder {
-  color: #777;
-  opacity: 1;
-}
-
-.testing-form input:focus {
-  border-bottom-color: #111;
-}
-
-/* PROCEED BUTTON */
-
-.testing-form button {
-  display: block;
-  margin: 25px auto 0;
-  background: #111;
-  color: #fff;
-  border: none;
-  border-radius: 0;
-  padding: 12px 25px;
-  font-size: 12px;
-  cursor: pointer;
-}
-
-.testing-form button:hover {
-  background: #333;
-}
 
 /* =========================================
    TABLET RESPONSIVENESS
@@ -346,11 +250,6 @@ body {
 
   .diamond-right {
     left: calc(100% - 180px);
-  }
-
-  .testing-diamond {
-    width: min(55vw, 450px);
-    height: min(55vw, 450px);
   }
 }
 
@@ -417,33 +316,11 @@ body {
     padding: 20px;
     font-size: 10px;
   }
-
-  .testing-content {
-    min-height: calc(100dvh - 65px);
-  }
-
-  .testing-label {
-    left: 20px;
-    top: 15px;
-  }
-
-  .testing-diamond {
-    width: min(65vw, 280px);
-    height: min(65vw, 280px);
-  }
-
-  .testing-form {
-    width: 85%;
-  }
-
-  .testing-form input {
-    font-size: 20px;
-  }
-
-  .testing-form button {
-    font-size: 11px;
-  }
 }
+
+/* =========================================
+   SMALL MOBILE SCREENS
+========================================= */
 
 @media (max-width: 400px) {
   .hero-title {
@@ -452,10 +329,5 @@ body {
 
   .hero-nav {
     font-size: 9px;
-  }
-
-  .testing-diamond {
-    width: 230px;
-    height: 230px;
   }
 }

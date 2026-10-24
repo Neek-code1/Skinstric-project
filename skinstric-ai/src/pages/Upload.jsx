@@ -1,7 +1,111 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaCamera, FaImage } from "react-icons/fa";
+import { FaCamera } from "react-icons/fa";
 import "./Upload.css";
+
+/* ==========================================
+   CAMERA SHUTTER ICON
+========================================== */
+
+function CameraIcon() {
+  return (
+    <svg
+      viewBox="0 0 100 100"
+      className="upload-symbol"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        cx="50"
+        cy="50"
+        r="45"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+
+      <circle
+        cx="50"
+        cy="50"
+        r="39"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+
+      <g
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.3"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      >
+        <path d="M50 22 L65 22 L76 41 L60 41 L52 28" />
+        <path d="M76 41 L82 53 L71 72 L63 58 L69 46" />
+        <path d="M71 72 L63 82 L41 82 L49 68 L63 68" />
+        <path d="M41 82 L27 76 L17 58 L33 58 L41 72" />
+        <path d="M17 58 L18 44 L29 26 L37 40 L30 53" />
+        <path d="M29 26 L41 19 L62 19 L54 33 L40 33" />
+      </g>
+
+      <path
+        d="M42 37 L58 37 L67 50 L58 63 L42 63 L33 50 Z"
+        fill="white"
+        stroke="currentColor"
+        strokeWidth="2.3"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+/* ==========================================
+   GALLERY ICON
+========================================== */
+
+function GalleryIcon() {
+  return (
+    <svg
+      viewBox="0 0 100 100"
+      className="upload-symbol"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        cx="50"
+        cy="50"
+        r="45"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+
+      <circle
+        cx="50"
+        cy="50"
+        r="39"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+
+      <circle cx="61" cy="34" r="9" fill="currentColor" />
+
+      <path
+        d="M18 66 L32 49 Q37 44 42 49
+           L55 61 Q60 65 66 60
+           L82 47 L82 69
+           Q70 84 50 84
+           Q30 84 18 66 Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+/* ==========================================
+   UPLOAD PAGE
+========================================== */
 
 export default function Upload() {
   const navigate = useNavigate();
@@ -9,14 +113,18 @@ export default function Upload() {
   const videoRef = useRef(null);
   const streamRef = useRef(null);
   const fileInputRef = useRef(null);
-  const photoUrlRef = useRef(null);
+  const requestRef = useRef(0);
 
   const [cameraOpen, setCameraOpen] = useState(false);
   const [photo, setPhoto] = useState(null);
   const [error, setError] = useState("");
+  const [showPermission, setShowPermission] = useState(false);
 
-  // STOP WEBCAM
+  /* STOP CAMERA */
+
   function stopCamera() {
+    requestRef.current += 1;
+
     if (streamRef.current) {
       streamRef.current.getTracks().forEach((track) => {
         track.stop();
@@ -30,19 +138,22 @@ export default function Upload() {
     }
   }
 
-  // OPEN WEBCAM
+  /* OPEN CAMERA */
+
   async function openCamera() {
+    setShowPermission(false);
     setError("");
-    setPhoto(null);
 
     if (!navigator.mediaDevices?.getUserMedia) {
       setError("Your browser does not support camera access.");
       return;
     }
 
-    try {
-      stopCamera();
+    stopCamera();
 
+    const currentRequest = requestRef.current;
+
+    try {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: {
           facingMode: "user",
@@ -50,7 +161,13 @@ export default function Upload() {
         audio: false,
       });
 
+      if (currentRequest !== requestRef.current) {
+        stream.getTracks().forEach((track) => track.stop());
+        return;
+      }
+
       streamRef.current = stream;
+      setPhoto(null);
       setCameraOpen(true);
     } catch (err) {
       console.error("Camera error:", err);
@@ -61,29 +178,38 @@ export default function Upload() {
     }
   }
 
-  // CONNECT VIDEO TO WEBCAM
-  useEffect(() => {
-    if (cameraOpen && videoRef.current && streamRef.current) {
-      videoRef.current.srcObject = streamRef.current;
+  /* CONNECT CAMERA STREAM TO VIDEO */
 
-      videoRef.current.play().catch((err) => {
-        console.error("Video playback error:", err);
-      });
+  useEffect(() => {
+    if (!cameraOpen || !videoRef.current || !streamRef.current) {
+      return;
     }
+
+    videoRef.current.srcObject = streamRef.current;
+
+    videoRef.current.play().catch((err) => {
+      console.error("Video playback error:", err);
+    });
   }, [cameraOpen]);
 
-  // CLEAN UP WHEN LEAVING PAGE
+  /* CLEAN UP CAMERA WHEN LEAVING PAGE */
+
   useEffect(() => {
     return () => {
+      requestRef.current += 1;
+
       if (streamRef.current) {
         streamRef.current.getTracks().forEach((track) => {
           track.stop();
         });
+
+        streamRef.current = null;
       }
     };
   }, []);
 
-  // CAPTURE PHOTO
+  /* CAPTURE PHOTO */
+
   function capturePhoto() {
     const video = videoRef.current;
 
@@ -104,21 +230,29 @@ export default function Upload() {
       return;
     }
 
+    context.translate(canvas.width, 0);
+    context.scale(-1, 1);
+
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-    const capturedImage = canvas.toDataURL("image/jpeg", 0.85);
+    const capturedPhoto = canvas.toDataURL("image/jpeg", 0.8);
 
-    setPhoto(capturedImage);
+    setPhoto(capturedPhoto);
     setCameraOpen(false);
     stopCamera();
     setError("");
   }
 
-  // UPLOAD PHOTO FROM GALLERY
+  /* SELECT PHOTO FROM GALLERY */
+
   function handleFileChange(event) {
     const file = event.target.files?.[0];
 
-    if (!file) return;
+    event.target.value = "";
+
+    if (!file) {
+      return;
+    }
 
     if (!file.type.startsWith("image/")) {
       setError("Please select a valid image.");
@@ -127,38 +261,39 @@ export default function Upload() {
 
     stopCamera();
     setCameraOpen(false);
+    setShowPermission(false);
     setError("");
 
     const reader = new FileReader();
 
     reader.onload = () => {
-      setPhoto(reader.result);
+      if (typeof reader.result === "string") {
+        setPhoto(reader.result);
+      }
     };
 
     reader.onerror = () => {
-      setError("Unable to load selected photo.");
+      setError("Unable to load the selected photo.");
     };
 
     reader.readAsDataURL(file);
-
-    event.target.value = "";
   }
 
-  // RETAKE PHOTO
+  /* RETAKE PHOTO */
+
   function retakePhoto() {
-    setPhoto(null);
     openCamera();
   }
 
-  // CHOOSE ANOTHER PHOTO
-  function chooseAnother() {
-    setPhoto(null);
-    setError("");
+  /* CHOOSE ANOTHER PHOTO */
 
+  function chooseAnother() {
+    setError("");
     fileInputRef.current?.click();
   }
 
-  // CONFIRM PHOTO AND NAVIGATE
+  /* CONFIRM PHOTO AND CONTINUE */
+
   function confirmPhoto() {
     if (!photo) {
       setError("Please take or upload a photo first.");
@@ -174,69 +309,39 @@ export default function Upload() {
     } catch (err) {
       console.error("Photo confirmation error:", err);
 
-      setError("Unable to save your photo. Please try again.");
+      setError("Unable to save your photo. Try a smaller image.");
     }
   }
+
+  /* CANCEL CAMERA */
+
+  function cancelCamera() {
+    stopCamera();
+    setCameraOpen(false);
+    setError("");
+  }
+
+  /* ==========================================
+     PAGE JSX
+  ========================================== */
 
   return (
     <div className="upload-page">
       {/* HEADER */}
-      <header className="navbar">
-        <div className="brand">
-          <strong>SKINSTRIC</strong>
-          <span>[ ANALYSIS ]</span>
+
+      <header className="upload-header">
+        <div className="upload-brand">
+          <Link to="/">SKINSTRIC</Link>
+          <span>[ INTRO ]</span>
         </div>
 
-        <button className="code-btn" type="button">
+        <button className="upload-code" type="button">
           ENTER CODE
         </button>
       </header>
 
-      {/* PAGE HEADING */}
-      <div className="upload-heading">
-        <p>TO START ANALYSIS</p>
-      </div>
+      {/* HIDDEN GALLERY INPUT */}
 
-      {/* CAMERA AND GALLERY OPTIONS */}
-      {!cameraOpen && !photo && (
-        <main className="upload-content">
-          {/* CAMERA OPTION */}
-          <div className="upload-choice">
-            <div className="upload-diamond">
-              <button
-                type="button"
-                className="upload-icon"
-                onClick={openCamera}
-                aria-label="Open webcam"
-              >
-                <FaCamera />
-              </button>
-            </div>
-
-            <p>ALLOW A.I. TO SCAN YOUR FACE</p>
-          </div>
-
-          {/* GALLERY OPTION */}
-          <div className="upload-choice">
-            <div className="upload-diamond">
-              <button
-                type="button"
-                className="upload-icon"
-                onClick={() => {
-                  fileInputRef.current?.click();
-                }}
-                aria-label="Upload photo"
-              >
-                <FaImage />
-              </button>
-            </div>
-
-            <p>ALLOW A.I. TO ACCESS GALLERY</p>
-          </div>
-        </main>
-      )}
-
-      {/* HIDDEN FILE INPUT */}
       <input
         ref={fileInputRef}
         type="file"
@@ -245,46 +350,154 @@ export default function Upload() {
         onChange={handleFileChange}
       />
 
-      {/* LIVE CAMERA PREVIEW */}
+      {/* INITIAL CAMERA / GALLERY SELECTION */}
+
+      {!cameraOpen && !photo && (
+        <>
+          <div className="upload-heading">
+            <p>TO START ANALYSIS</p>
+          </div>
+
+          <aside className="upload-small-preview">
+            <span>Preview</span>
+            <div className="upload-preview-placeholder" />
+          </aside>
+
+          <main className="upload-content">
+            {/* CAMERA OPTION */}
+
+            <div className="upload-choice upload-camera-choice">
+              <div className="upload-diamond-stack" aria-hidden="true">
+                <div className="upload-diamond diamond-one" />
+                <div className="upload-diamond diamond-two" />
+                <div className="upload-diamond diamond-three" />
+              </div>
+
+              <button
+                type="button"
+                className="upload-icon"
+                onClick={() => setShowPermission(true)}
+                aria-label="Open camera"
+              >
+                <CameraIcon />
+              </button>
+
+              <div className="upload-camera-label">
+                <span className="upload-line" />
+
+                <span>
+                  ALLOW A.I.
+                  <br />
+                  TO SCAN YOUR FACE
+                </span>
+              </div>
+            </div>
+
+            {/* GALLERY OPTION */}
+
+            <div className="upload-choice upload-gallery-choice">
+              <div className="upload-diamond-stack" aria-hidden="true">
+                <div className="upload-diamond diamond-one" />
+                <div className="upload-diamond diamond-two" />
+                <div className="upload-diamond diamond-three" />
+              </div>
+
+              <button
+                type="button"
+                className="upload-icon"
+                onClick={() => fileInputRef.current?.click()}
+                aria-label="Choose image from gallery"
+              >
+                <GalleryIcon />
+              </button>
+
+              <div className="upload-gallery-label">
+                <span className="upload-line" />
+
+                <span>
+                  ALLOW A.I.
+                  <br />
+                  ACCESS GALLERY
+                </span>
+              </div>
+            </div>
+          </main>
+        </>
+      )}
+
+      {/* CAMERA PERMISSION MODAL */}
+
+      {showPermission && !cameraOpen && !photo && (
+        <div className="upload-modal-overlay">
+          <div
+            className="upload-permission-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="upload-permission-title"
+          >
+            <h2 id="upload-permission-title">
+              ALLOW A.I. TO ACCESS YOUR CAMERA
+            </h2>
+
+            <div className="upload-modal-actions">
+              <button type="button" onClick={() => setShowPermission(false)}>
+                DENY
+              </button>
+
+              <button type="button" onClick={openCamera}>
+                ALLOW
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* LIVE CAMERA */}
+
       {cameraOpen && (
         <main className="camera-section">
-          <h2>POSITION YOUR FACE IN THE FRAME</h2>
+          <div className="camera-stage">
+            <video
+              ref={videoRef}
+              autoPlay
+              playsInline
+              muted
+              className="camera-video"
+            />
 
-          <video
-            ref={videoRef}
-            autoPlay
-            playsInline
-            muted
-            className="camera-video"
-          />
+            <div className="camera-overlay">
+              <p>POSITION YOUR FACE IN THE FRAME</p>
 
-          <div className="camera-actions">
-            <button
-              type="button"
-              onClick={() => {
-                stopCamera();
-                setCameraOpen(false);
-              }}
-            >
-              CANCEL
-            </button>
+              <div className="camera-actions">
+                <button type="button" onClick={cancelCamera}>
+                  CANCEL
+                </button>
 
-            <button type="button" onClick={capturePhoto}>
-              <FaCamera />
-              CAPTURE PHOTO
-            </button>
+                <button type="button" onClick={capturePhoto}>
+                  <FaCamera />
+                  CAPTURE PHOTO
+                </button>
+              </div>
+            </div>
           </div>
         </main>
       )}
 
-      {/* CAPTURED PHOTO PREVIEW */}
-      {photo && (
-        <main className="camera-section">
+      {/* PHOTO PREVIEW */}
+
+      {photo && !cameraOpen && (
+        <main className="camera-section upload-preview-section">
+          <aside className="upload-small-preview">
+            <span>Preview</span>
+
+            <img src={photo} alt="Small selected photo preview" />
+          </aside>
+
           <h2>PREVIEW YOUR PHOTO</h2>
 
           <img
             src={photo}
-            alt="Captured face preview"
+            alt="Selected photo preview"
             className="camera-preview"
           />
 
@@ -305,19 +518,23 @@ export default function Upload() {
       )}
 
       {/* ERROR MESSAGE */}
+
       {error && (
         <p className="camera-message" role="alert">
           {error}
         </p>
       )}
 
-      {/* FOOTER */}
+      {/* BACK BUTTON */}
+
       <footer className="upload-footer">
         <Link to="/location" className="upload-back" onClick={stopCamera}>
-          ← BACK
-        </Link>
+          <span className="upload-arrow-diamond">
+            <span className="upload-arrow-left" />
+          </span>
 
-        <span>CHOOSE A PHOTO TO CONTINUE</span>
+          <span>BACK</span>
+        </Link>
       </footer>
     </div>
   );

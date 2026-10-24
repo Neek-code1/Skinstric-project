@@ -3,25 +3,30 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Demographics.css";
 
-// DEMONSTRATION DATA ONLY
-// These are not actual AI predictions.
+// Sample values for demonstrating the interface.
+// No image-based demographic analysis is performed.
 
 const sampleResults = {
   race: [
-    { name: "Black", value: 82 },
-    { name: "White", value: 9 },
-    { name: "Asian", value: 5 },
-    { name: "Other", value: 4 },
+    { name: "Southeast asian", value: 62 },
+    { name: "White", value: 14 },
+    { name: "Black", value: 12 },
+    { name: "East asian", value: 4 },
+    { name: "Middle eastern", value: 4 },
+    { name: "South asian", value: 1 },
+    { name: "Latino hispanic", value: 0 },
   ],
   age: [
-    { name: "30-39", value: 68 },
-    { name: "20-29", value: 18 },
+    { name: "60-69", value: 65 },
+    { name: "50-59", value: 15 },
     { name: "40-49", value: 10 },
-    { name: "Other", value: 4 },
+    { name: "30-39", value: 6 },
+    { name: "20-29", value: 3 },
+    { name: "70+", value: 1 },
   ],
   sex: [
-    { name: "Female", value: 94 },
-    { name: "Male", value: 6 },
+    { name: "Male", value: 86 },
+    { name: "Female", value: 14 },
   ],
 };
 
@@ -35,9 +40,9 @@ export default function Demographics() {
   const [category, setCategory] = useState("race");
 
   const [selected, setSelected] = useState({
-    race: "Black",
-    age: "30-39",
-    sex: "Female",
+    race: "Southeast asian",
+    age: "60-69",
+    sex: "Male",
   });
 
   const results = sampleResults[category];
@@ -56,11 +61,10 @@ export default function Demographics() {
 
   return (
     <div className="demographics-page">
-      {/* HEADER */}
       <header className="demographics-header">
         <div className="demographics-brand">
           <Link to="/">SKINSTRIC</Link>
-          <span>[ ANALYSIS ]</span>
+          <span>[ INTRO ]</span>
         </div>
 
         <button
@@ -71,19 +75,13 @@ export default function Demographics() {
         </button>
       </header>
 
-      {/* PAGE TITLE */}
       <section className="demographics-intro">
         <p>A.I. ANALYSIS</p>
         <h1>DEMOGRAPHICS</h1>
         <p>PREDICTED RACE & AGE</p>
-        <span className="demographics-demo-label">
-          DEMONSTRATION RESULTS — NOT REAL PREDICTIONS
-        </span>
       </section>
 
-      {/* DASHBOARD */}
       <main className="demographics-layout">
-        {/* LEFT CATEGORY SELECTOR */}
         <aside className="demographics-categories">
           {categories.map((item) => (
             <button
@@ -102,32 +100,31 @@ export default function Demographics() {
           ))}
         </aside>
 
-        {/* CENTER CONFIDENCE CHART */}
         <section className="demographics-chart-panel">
           <h2>{active.name}</h2>
-          <p>{category.toUpperCase()}</p>
 
-          <div
-            className="demographics-chart"
-            role="img"
-            aria-label={
-              `${active.name}: ${active.value}% demo value`
-            }
-            style={{
-              "--percentage": `${active.value}%`,
-            }}
-          >
-            <div className="demographics-chart-inner">
-              <strong>{active.value}%</strong>
+          <div className="demographics-chart-area">
+            <div
+              className="demographics-chart"
+              role="img"
+              aria-label={
+                `${active.name}: ${active.value}% demo value`
+              }
+              style={{
+                "--percentage": `${active.value}%`,
+              }}
+            >
+              <div className="demographics-chart-inner">
+                <strong>{active.value}%</strong>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* RIGHT RESULTS PANEL */}
         <section className="demographics-results">
           <div className="demographics-results-heading">
             <strong>{category.toUpperCase()}</strong>
-            <strong>DEMO VALUE</strong>
+            <strong>DEMO CONFIDENCE</strong>
           </div>
 
           {results.map((item) => (
@@ -147,7 +144,7 @@ export default function Demographics() {
                   aria-hidden="true"
                 >
                   {active.name === item.name
-                    ? "◆"
+                    ? "◈"
                     : "◇"}
                 </span>
                 {item.name}
@@ -159,17 +156,26 @@ export default function Demographics() {
         </section>
       </main>
 
-      <p className="demographics-disclaimer">
-        These values are fictional sample data for
-        interface testing. No AI analysis of your
-        photograph has been performed.
-      </p>
+      <div className="demographics-bottom">
+        <Link to="/select" className="demographics-nav">
+          <span className="demographics-arrow-box">
+            <span className="demographics-arrow-left" />
+          </span>
+          <span>BACK</span>
+        </Link>
 
-      {/* FOOTER */}
-      <footer className="demographics-footer">
-        <Link to="/processing">◇ BACK</Link>
-        <Link to="/">HOME ◇</Link>
-      </footer>
+        <p className="demographics-disclaimer">
+          Demonstration data only. No actual A.I.
+          analysis of your photo has been performed.
+        </p>
+
+        <Link to="/" className="demographics-nav">
+          <span>HOME</span>
+          <span className="demographics-arrow-box">
+            <span className="demographics-arrow-right" />
+          </span>
+        </Link>
+      </div>
     </div>
   );
 }
